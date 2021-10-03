@@ -1,4 +1,5 @@
 import { BoardProps } from "boardgame.io/react";
+import { INVALID_MOVE } from "boardgame.io/core";
 import { HexUtils } from "react17-hexgrid";
 
 import {
@@ -26,6 +27,11 @@ const endCurrentPlayerTurn: HexscapeMove = (G, ctx) => {
   ctx?.events?.endTurn();
 };
 const moveAction: HexscapeMove = (G, ctx, unit: GameUnit, endHex: BoardHex) => {
+  const isNoUnit = !unit || typeof unit === "undefined";
+  const isNoEndHex = !endHex || typeof endHex === "undefined";
+  if (isNoUnit || isNoEndHex) {
+    return INVALID_MOVE;
+  }
   const { unitID, movePoints } = unit;
   const playersOrderMarkers = G.players[ctx.currentPlayer].orderMarkers;
   const endHexID = endHex.id;
