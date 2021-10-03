@@ -30,5 +30,6 @@
   "peacock.color": "#f20291",
   "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
   "editor.formatOnSave": true,
-  "eslint.alwaysShowStatus": true
+  "eslint.alwaysShowStatus": true,
+  "cSpell.words": ["Hexscape"]
 }
