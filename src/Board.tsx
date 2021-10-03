@@ -8,7 +8,11 @@ import {
   BgioCtxProvider,
   BgioChatProvider,
 } from "./bgio-contexts";
-import { ExampleUI } from "ui/ExampleUI";
+import { HexscapePlayerView } from "ui";
+import { MapContextProvider } from "contexts/MapContext";
+import { UIContextProvider } from "contexts/UIContext";
+import { PlacementContextProvider } from "contexts/PlacementPhaseContext";
+import { PlayContextProvider } from "contexts/PlayPhaseContext";
 
 type MyBoardProps = BoardProps & { chatMessages?: ChatMessage[] };
 
@@ -41,10 +45,10 @@ export function Board(props: MyBoardProps) {
   return (
     <BgioClientInfoProvider
       log={log}
-      playerID={playerID}
+      playerID={playerID || ""}
       matchID={matchID}
       matchData={matchData}
-      credentials={credentials}
+      credentials={credentials || ""}
       isMultiplayer={isMultiplayer}
       isConnected={isConnected}
       isActive={isActive}
@@ -57,7 +61,15 @@ export function Board(props: MyBoardProps) {
                 chatMessages={chatMessages}
                 sendChatMessage={sendChatMessage}
               >
-                <ExampleUI />
+                <MapContextProvider>
+                  <UIContextProvider>
+                    <PlacementContextProvider>
+                      <PlayContextProvider>
+                        <HexscapePlayerView />
+                      </PlayContextProvider>
+                    </PlacementContextProvider>
+                  </UIContextProvider>
+                </MapContextProvider>
               </BgioChatProvider>
             </BgioEventsProvider>
           </BgioMovesProvider>

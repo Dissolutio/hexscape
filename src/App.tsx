@@ -6,7 +6,7 @@ import { Debug } from "boardgame.io/debug";
 import { BgioLobbyApiProvider } from "bgio-contexts";
 import { AuthProvider, useAuth } from "hooks/useAuth";
 import { MultiplayerLobby, MultiplayerLobbyProvider } from "lobby";
-import { myGame } from "./game/game";
+import { Hexscape } from "./game/game";
 import { Board } from "./Board";
 import { MultiplayerNav } from "./Nav";
 
@@ -18,7 +18,7 @@ import { MultiplayerNav } from "./Nav";
 const isDeploymentEnv = process.env.NODE_ENV === "production";
 const isDevEnv = process.env.NODE_ENV === "development";
 const isSeparateServer = Boolean(process.env.REACT_APP_WITH_SEPARATE_SERVER);
-const isLocalApp = isDevEnv && !isSeparateServer;
+export const isLocalApp = isDevEnv && !isSeparateServer;
 
 // use appropriate address for server
 const hostname = window?.location?.hostname ?? "";
@@ -37,7 +37,7 @@ const reduxDevTools =
   (window as any).__REDUX_DEVTOOLS_EXTENSION__();
 
 const bgioClientOptions = {
-  game: myGame,
+  game: Hexscape,
   board: Board,
   numPlayers: 2,
 };
